@@ -1,0 +1,23 @@
+{
+  "name": "age-calculator-app",
+  "version": "1.0.0",
+  "description": "A page that given a date tells you how old you are",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArthurWiliams/age-calculator.git"
+  },
+  "keywords": [
+    "Age",
+    "Date"
+  ],
+  "author": "Arthur Wiliams",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ArthurWiliams/age-calculator/issues"
+  },
+  "homepage": "https://github.com/ArthurWiliams/age-calculator#readme"
+}
