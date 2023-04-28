@@ -4,6 +4,7 @@
   "description": "A page that given a date tells you how old you are",
   "main": "",
   "private": "true",
+  "type": "module",
   "browserslist": "defaults",
   "source": "src/index.html",
   "scripts": {
