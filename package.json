@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A page that given a date tells you how old you are",
   "main": "",
+  "private":"true",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
