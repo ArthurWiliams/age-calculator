@@ -26,5 +26,8 @@
   "homepage": "https://github.com/ArthurWiliams/age-calculator#readme",
   "devDependencies": {
     "parcel": "^2.8.3"
+  },
+  "dependencies": {
+    "tailwindcss": "^3.3.2"
   }
 }
