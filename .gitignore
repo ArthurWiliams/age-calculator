@@ -17,3 +17,6 @@
 
 # Avoid node_modules
 node_modules
+
+# Avoid parcel cache folder
+.parcel-cache
