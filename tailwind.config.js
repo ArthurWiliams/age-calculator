@@ -21,7 +21,11 @@ module.exports = {
       bold: "700",
       "extra-bold": "800",
     },
-    extend: {},
+    extend: {
+      fontSize: {
+        "3xl": ["2rem", "2.25"],
+      },
+    },
   },
   plugins: [],
 };
