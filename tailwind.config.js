@@ -1,3 +1,5 @@
+import defaultTheme from "tailwindcss/defaultTheme";
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{html,ts,js}"],
@@ -12,7 +14,7 @@ module.exports = {
       "off-black": "hsl(0, 0%, 8%)",
     },
     fontFamily: {
-      sans: ["Poppins", "sans-serif"],
+      sans: ["Poppins", ...defaultTheme.fontFamily.sans],
     },
     fontWeight: {
       normal: "400",
