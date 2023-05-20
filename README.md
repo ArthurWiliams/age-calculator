@@ -34,7 +34,7 @@ Users should be able to:
 
 ### Screenshot
 
-![App Screenshot](./screenshot.jpg)
+![App Screenshot](./screenshot.png)
 
 ### Links
 
