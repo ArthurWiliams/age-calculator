@@ -13,6 +13,7 @@ This is a solution to the [Age calculator app challenge on Frontend Mentor](http
   - [My process](#my-process)
     - [Built with](#built-with)
     - [Useful resources](#useful-resources)
+    - [Continued development](#continued-development)
   - [Author](#author)
 
 ## Overview
@@ -56,6 +57,10 @@ Users should be able to:
 ### Useful resources
 
 - [MDN Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) - This helped me learn how Date objects work.
+
+### Continued development
+
+I would like to reduce and refactor the TS code.
 
 ## Author
 
