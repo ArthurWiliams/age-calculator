@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+  lang="en"
+  class="bg-off-white text-[11px] md:text-[12px] selection:bg-purple selection:text-white h-full"
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,9 +19,98 @@
 
     <link rel="stylesheet" href="index.css" />
   </head>
-  <body>
+  <body class="min-h-full flex justify-center items-center">
     <h1 class="sr-only">Please Enter your birthdate</h1>
-    Day DD Month MM Year YYYY -- years -- months -- days
+
+    <main
+      class="px-8 md:px-14 py-16 m-5 rounded-3xl rounded-br-[10rem] bg-white max-w-[53rem]"
+    >
+      <form id="birthdate-form">
+        <div class="grid grid-cols-3 gap-6 md:gap-7 md:w-[75%]">
+          <p>
+            <label
+              class="mb-1 text-[1.03rem] inline-block uppercase text-smokey-grey font-bold tracking-[0.3rem]"
+              for="day"
+              >day</label
+            >
+            <input
+              class="focus:border-purple outline-none w-full px-5 py-3 mb-1 rounded-xl text-[1.8rem] border-[1px] border-off-white font-bold text-off-black"
+              type="text"
+              name="day"
+              id="day-field"
+              autocomplete="off"
+              placeholder="DD"
+              inputmode="numeric"
+              aria-describedby="day-desc"
+            />
+            <span class="text-light-red italic text-sm" id="day-desc"></span>
+          </p>
+
+          <p>
+            <label
+              class="mb-1 text-[1.03rem] inline-block uppercase text-smokey-grey font-bold tracking-[0.3rem]"
+              for="month"
+              >month</label
+            >
+            <input
+              class="focus:border-purple outline-none w-full px-5 py-3 mb-1 rounded-xl text-[1.8rem] border-[1px] border-off-white font-bold text-off-black"
+              type="text"
+              name="month"
+              id="month-field"
+              autocomplete="off"
+              placeholder="MM"
+              inputmode="numeric"
+              aria-describedby="month-desc"
+            />
+            <span class="text-light-red italic text-sm" id="month-desc"></span>
+          </p>
+
+          <p>
+            <label
+              class="mb-1 text-[1.03rem] inline-block uppercase text-smokey-grey font-bold tracking-[0.3rem]"
+              for="year"
+              >year</label
+            >
+            <input
+              class="focus:border-purple outline-none w-full px-5 py-3 mb-1 rounded-xl text-[1.8rem] border-[1px] border-off-white font-bold text-off-black"
+              type="text"
+              name="year"
+              id="year-field"
+              autocomplete="off"
+              placeholder="YYYY"
+              inputmode="numeric"
+              aria-describedby="year-desc"
+            />
+            <span class="text-light-red italic text-sm" id="year-desc"></span>
+          </p>
+        </div>
+
+        <div class="my-12 md:mb-4 md:mt-1 relative">
+          <span
+            class="w-full block h-[2px] top-1/2 bg-light-grey absolute"
+          ></span>
+          <button
+            class="bg-purple w-24 h-24 rounded-full relative mx-auto md:mr-0 block focus:bg-off-black active:bg-off-black focus:outline-none"
+            type="submit"
+          >
+            <img
+              class="w-[40%] mx-auto"
+              src="../assets/images/icon-arrow.svg"
+              alt="Submit"
+            />
+          </button>
+        </div>
+      </form>
+
+      <div
+        class="space-y-2 italic font-extra-bold text-[4.6rem] leading-none md:text-8xl"
+        id="birthdate"
+      >
+        <p><span class="text-purple" id="years">--</span> years</p>
+        <p><span class="text-purple" id="months">--</span> months</p>
+        <p><span class="text-purple" id="days">--</span> days</p>
+      </div>
+    </main>
 
     <footer class="sr-only">
       Challenge by
@@ -29,6 +121,6 @@
       >. Coded by
       <a href="https://github.com/ArthurWiliams">Arthur Williams</a>.
     </footer>
-    <script src="index.ts"></script>
+    <script src="index.ts" type="module"></script>
   </body>
 </html>
