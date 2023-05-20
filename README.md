@@ -61,7 +61,7 @@ Users should be able to:
 
 ### Continued development
 
-I would like to reduce and refactor the TS code.
+I would like to reduce and refactor the TS code, make the page more consistent with the design and complete the bonus condition for this challenge.
 
 ## Author
 
