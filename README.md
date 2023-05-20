@@ -38,7 +38,7 @@ Users should be able to:
 
 ### Links
 
-<!-- - Solution URL: [Add solution URL here](https://your-solution-url.com) -->
+- Solution URL: [https://www.frontendmentor.io/solutions/age-calculator-with-vanila-ts-and-tailwindcss-AiASOHLY7X](https://www.frontendmentor.io/solutions/age-calculator-with-vanila-ts-and-tailwindcss-AiASOHLY7X)
 
 - Live Site URL: [https://mellifluous-mandazi-286b39.netlify.app](https://mellifluous-mandazi-286b39.netlify.app/)
 
