@@ -1,12 +1,11 @@
 import Field from "./field";
 import { sub } from "date-fns";
 
-export function showError(field: Field, message: string) {
-  const FIELD = field.element;
-  const ERROR_CONTAINER = FIELD?.nextElementSibling;
+export function showError(field: HTMLInputElement, message: string) {
+  const ERROR_CONTAINER = field?.nextElementSibling;
 
-  FIELD?.classList.replace("border-off-white", "border-light-red");
-  FIELD?.previousElementSibling?.classList.replace(
+  field?.classList.replace("border-off-white", "border-light-red");
+  field?.previousElementSibling?.classList.replace(
     "text-smokey-grey",
     "text-light-red"
   );
@@ -16,12 +15,11 @@ export function showError(field: Field, message: string) {
   }
 }
 
-export function hideError(field: Field) {
-  const FIELD = field.element;
-  const ERROR_CONTAINER = FIELD?.nextElementSibling;
+export function hideError(field: HTMLInputElement) {
+  const ERROR_CONTAINER = field?.nextElementSibling;
 
-  FIELD?.classList.replace("border-light-red", "border-off-white");
-  FIELD?.previousElementSibling?.classList.replace(
+  field?.classList.replace("border-light-red", "border-off-white");
+  field?.previousElementSibling?.classList.replace(
     "text-light-red",
     "text-smokey-grey"
   );
