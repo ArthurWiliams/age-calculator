@@ -30,25 +30,6 @@ export default class Field {
   //   });
   // }
 
-  validate(fields: Fields) {
-    const FIELD = this;
-
-    if (FIELD === null) {
-      this.isValid = true;
-      return null;
-    }
-
-    for (const rule of this.rules) {
-      if (!rule.validator(FIELD, fields)) {
-        this.isValid = false;
-        return rule.message;
-      }
-    }
-
-    this.isValid = true;
-    return null;
-  }
-
   value() {
     return this.element?.value ?? "";
   }
