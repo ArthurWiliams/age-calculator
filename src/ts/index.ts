@@ -1,5 +1,4 @@
 import Form from "./form";
-import { TElement } from "./types";
 import { createDate, getAge, hideError, showError } from "./utils";
 import {
   isEmpty,

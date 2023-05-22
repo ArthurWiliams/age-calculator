@@ -1,4 +1,4 @@
-import { IRule, TElement, Fields } from "./types";
+import { IRule, Fields } from "./types";
 
 export default class Field {
   element: TElement<HTMLInputElement>;

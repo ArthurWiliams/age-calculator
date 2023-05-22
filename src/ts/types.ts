@@ -1,6 +1,5 @@
 import Field from "./field";
 
-export type TElement<T extends Element> = T | null;
 export type TValidator = (value: string, fields: Fields) => boolean;
 
 export interface Fields {

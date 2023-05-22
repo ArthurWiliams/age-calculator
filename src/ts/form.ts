@@ -1,4 +1,4 @@
-import { IRule, TElement, Fields } from "./types";
+import { IRule, Fields } from "./types";
 import { hideError, showError } from "./utils";
 import Field from "./field";
 
