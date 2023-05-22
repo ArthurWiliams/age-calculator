@@ -1,4 +1,4 @@
-import { Fields } from "./types";
+import { Fields, IDate } from "./types";
 import { createDate } from "./utils";
 
 export function isEmpty(value: string): boolean {
