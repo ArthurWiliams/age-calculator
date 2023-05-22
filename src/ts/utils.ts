@@ -1,3 +1,5 @@
+import { IDate } from "./types";
+
 export const DAYS_OF_MONTHS = {
   1: 31,
   2: 28,
@@ -39,6 +41,39 @@ export function hideError(field: HTMLInputElement) {
   if (ERROR_CONTAINER !== null) {
     ERROR_CONTAINER.textContent = "";
   }
+}
+
+export function getAge({ year, month, day }: IDate): IDate {
+  const CURRENT_DATE = new Date();
+
+  let [currentYear, currentMonth, currentDay] = [
+    CURRENT_DATE.getFullYear(),
+    CURRENT_DATE.getMonth() + 1,
+    CURRENT_DATE.getDate(),
+  ];
+
+  if (currentDay < day) {
+    const DAYS_OF_THE_MONTH = DAYS_OF_MONTHS[currentMonth];
+
+    if (isLeapYear(currentYear) && currentMonth === 2) {
+      currentDay += DAYS_OF_THE_MONTH + 1;
+    } else {
+      currentDay += DAYS_OF_THE_MONTH;
+    }
+
+    currentMonth -= 1;
+  }
+
+  if (currentMonth < month) {
+    currentYear -= 1;
+    currentMonth += 12;
+  }
+
+  return {
+    year: currentYear - year,
+    month: currentMonth - month,
+    day: currentDay - day,
+  };
 }
 
 export function getElementById<T extends Element>(id: string): T {
