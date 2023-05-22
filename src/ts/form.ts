@@ -47,14 +47,16 @@ export default class Form {
     for (const key in FIELDS) {
       const FIELD = FIELDS[key];
 
-      const ERROR_MESSAGE = FIELD.validate(FIELDS);
+      for (const rule of FIELD.rules) {
+        if (!rule.validator(FIELD.value, FIELDS)) {
+          FIELD.isValid = false;
+          showError(FIELD.element, rule.message);
+          break;
+        }
 
-      if (ERROR_MESSAGE !== null) {
-        showError(FIELD, ERROR_MESSAGE);
-        continue;
+        FIELD.isValid = true;
+        hideError(FIELD.element);
       }
-
-      hideError(FIELD);
     }
   }
 }
