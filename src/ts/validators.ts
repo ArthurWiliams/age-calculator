@@ -2,52 +2,48 @@ import Field from "./field";
 import { Fields } from "./types";
 import { createDate } from "./utils";
 
-export function isEmpty(field: Field) {
-  return !(field.value() === "");
+export function isEmpty(value: string): boolean {
+  return !(value === "");
 }
 
-export function isValidDay(field: Field) {
-  const VALUE = field.value();
-
-  if (!/^\d{1,2}$/.test(VALUE)) {
+export function isValidDay(value: string): boolean {
+  if (!/^\d{1,2}$/.test(value)) {
     return false;
   }
 
-  const DAY = parseInt(VALUE);
+  const DAY = parseInt(value);
 
   return DAY > 0 && DAY <= 31;
 }
 
-export function isValidMonth(field: Field) {
-  const VALUE = field.value();
-
-  if (!/^\d{1,2}$/.test(VALUE)) {
+export function isValidMonth(value: string): boolean {
+  if (!/^\d{1,2}$/.test(value)) {
     return false;
   }
 
-  const MONTH = parseInt(VALUE);
+  const MONTH = parseInt(value);
 
   return MONTH > 0 && MONTH <= 12;
 }
 
-export function isValidYear(field: Field) {
-  return /^\d{1,4}$/.test(field.value());
+export function isValidYear(value: string): boolean {
+  return /^\d{1,4}$/.test(value);
 }
 
-export function isYearPast(field: Field) {
-  const BIRTHDATE_YEAR = parseInt(field.value());
+export function isYearPast(value: string): boolean {
+  const YEAR = parseInt(value);
 
-  return BIRTHDATE_YEAR <= new Date().getFullYear();
+  return YEAR <= new Date().getFullYear();
 }
 
-export function isMonthPast(field: Field, fields: Fields) {
+export function isMonthPast(value: string, fields: Fields): boolean {
   const YEAR_FIELD = fields["year-field"];
 
   if (!YEAR_FIELD.isValid) {
     return true;
   }
 
-  const DATE = createDate(YEAR_FIELD.value(), field.value());
+  const DATE = createDate(YEAR_FIELD.value, value);
   const CURRENT_DATE = new Date();
 
   return !(
@@ -56,7 +52,7 @@ export function isMonthPast(field: Field, fields: Fields) {
   );
 }
 
-export function isDayPast(field: Field, fields: Fields) {
+export function isDayPast(value: string, fields: Fields): boolean {
   const MONTH_FIELD = fields["month-field"];
   const YEAR_FIELD = fields["year-field"];
 
@@ -64,11 +60,7 @@ export function isDayPast(field: Field, fields: Fields) {
     return true;
   }
 
-  const DATE = createDate(
-    YEAR_FIELD.value(),
-    MONTH_FIELD.value(),
-    field.value()
-  );
+  const DATE = createDate(YEAR_FIELD.value, MONTH_FIELD.value, value);
   const CURRENT_DATE = new Date();
 
   return !(
