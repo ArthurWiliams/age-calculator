@@ -1,5 +1,5 @@
 import { IRule, Fields } from "./types";
-import { hideError, showError } from "./utils";
+import { hideError, showError, getElementById } from "./utils";
 import Field from "./field";
 
 export default class Form {
@@ -12,18 +12,11 @@ export default class Form {
       return;
     }
 
-    if (form.startsWith("#")) {
-      form = form.slice(1);
+    try {
+      this.element = getElementById(form);
+    } catch (error) {
+      throw error;
     }
-
-    const FORM = <TElement<HTMLFormElement>>document.getElementById(form);
-
-    if (FORM === null) {
-      console.error(`Element with ${form} ID is not found!`);
-      return;
-    }
-
-    this.element = FORM;
   }
 
   isValid() {

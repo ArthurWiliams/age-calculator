@@ -1,4 +1,5 @@
 import { IRule, Fields } from "./types";
+import { getElementById } from "./utils";
 
 export default class Field {
   element: HTMLInputElement;
@@ -15,18 +16,11 @@ export default class Field {
       return;
     }
 
-    if (field.startsWith("#")) {
-      field = field.slice(1);
+    try {
+      this.element = getElementById(field);
+    } catch (error) {
+      throw error;
     }
-
-    const FIELD = <TElement<HTMLInputElement>>document.getElementById(field);
-
-    if (FIELD === null) {
-      console.error(`Element with ${field} ID is not found!`);
-      return;
-    }
-
-    this.element = FIELD;
   }
 
   // addRule(message: string, validator: TValidator) {
