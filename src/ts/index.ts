@@ -17,127 +17,118 @@ import {
   isValidDate,
 } from "./validators";
 
-function init() {
-  const FORM = new Form("birthdate-form");
+function init(): void {
+  try {
+    const FORM = new Form("birthdate-form");
 
-  const EMPTY_ERROR_MESSAGE = "This field is required";
-  const PAST_ERROR_MESSAGE = "Must be in the past";
+    const EMPTY_ERROR_MESSAGE = "This field is required";
+    const PAST_ERROR_MESSAGE = "Must be in the past";
 
-  const YEARS_CONTAINER = <TElement<HTMLSpanElement>>(
-    document.getElementById("years")
-  );
-  const MONTHS_CONTAINER = <TElement<HTMLSpanElement>>(
-    document.getElementById("months")
-  );
-  const DAYS_CONTAINER = <TElement<HTMLSpanElement>>(
-    document.getElementById("days")
-  );
+    const YEARS_CONTAINER = <HTMLSpanElement>getElementById("years");
+    const MONTHS_CONTAINER = <HTMLSpanElement>getElementById("months");
+    const DAYS_CONTAINER = <HTMLSpanElement>getElementById("days");
 
-  if (
-    YEARS_CONTAINER === null ||
-    MONTHS_CONTAINER === null ||
-    DAYS_CONTAINER === null
-  ) {
-    return;
-  }
+    FORM.addField("year-field", [
+      {
+        message: EMPTY_ERROR_MESSAGE,
+        validator: isEmpty,
+      },
+      {
+        message: "Must be a valid year",
+        validator: isValidYear,
+      },
+      {
+        message: PAST_ERROR_MESSAGE,
+        validator: isYearPast,
+      },
+    ]);
 
-  FORM.addField("year-field", [
-    {
-      message: EMPTY_ERROR_MESSAGE,
-      validator: isEmpty,
-    },
-    {
-      message: "Must be a valid year",
-      validator: isValidYear,
-    },
-    {
-      message: PAST_ERROR_MESSAGE,
-      validator: isYearPast,
-    },
-  ]);
+    FORM.addField("month-field", [
+      {
+        message: EMPTY_ERROR_MESSAGE,
+        validator: isEmpty,
+      },
+      {
+        message: "Must be a valid month",
+        validator: isValidMonth,
+      },
+      {
+        message: PAST_ERROR_MESSAGE,
+        validator: isMonthPast,
+      },
+    ]);
 
-  FORM.addField("month-field", [
-    {
-      message: EMPTY_ERROR_MESSAGE,
-      validator: isEmpty,
-    },
-    {
-      message: "Must be a valid month",
-      validator: isValidMonth,
-    },
-    {
-      message: PAST_ERROR_MESSAGE,
-      validator: isMonthPast,
-    },
-  ]);
+    FORM.addField("day-field", [
+      {
+        message: EMPTY_ERROR_MESSAGE,
+        validator: isEmpty,
+      },
+      {
+        message: "Must be a valid day",
+        validator: isValidDay,
+      },
+      {
+        message: PAST_ERROR_MESSAGE,
+        validator: isDayPast,
+      },
+    ]);
 
-  FORM.addField("day-field", [
-    {
-      message: EMPTY_ERROR_MESSAGE,
-      validator: isEmpty,
-    },
-    {
-      message: "Must be a valid day",
-      validator: isValidDay,
-    },
-    {
-      message: PAST_ERROR_MESSAGE,
-      validator: isDayPast,
-    },
-  ]);
+    FORM.element.addEventListener("submit", function (event) {
+      event.preventDefault();
 
-  FORM.element?.addEventListener("submit", (event) => {
-    event.preventDefault();
+      FORM.validate();
 
-    FORM.validate();
+      if (!FORM.isValid()) {
+        YEARS_CONTAINER.textContent = "- -";
+        MONTHS_CONTAINER.textContent = "- -";
+        DAYS_CONTAINER.textContent = "- -";
+        return false;
+      }
 
-    if (!FORM.isValid()) {
-      YEARS_CONTAINER.textContent = "--";
-      MONTHS_CONTAINER.textContent = "--";
-      DAYS_CONTAINER.textContent = "--";
-      return false;
-    }
+      const FIELDS = FORM.fields;
 
-    const FIELDS = FORM.fields;
-    const BIRTHDATE = createDate(
-      FIELDS["year-field"].value(),
-      FIELDS["month-field"].value(),
-      FIELDS["day-field"].value()
-    );
+      const BIRTHDATE = createDate(
+        FIELDS["year-field"].value,
+        FIELDS["month-field"].value,
+        FIELDS["day-field"].value
+      );
 
-    if (!isValidDate(BIRTHDATE)) {
+      if (!isValidDate(BIRTHDATE)) {
+        for (const key in FIELDS) {
+          const FIELD = FIELDS[key];
+
+          if (key === "day-field") {
+            FIELD.isValid = false;
+            showError(FIELD.element, "Must be valid date");
+            continue;
+          }
+
+          showError(FIELD.element, "");
+        }
+
+        YEARS_CONTAINER.textContent = "- -";
+        MONTHS_CONTAINER.textContent = "- -";
+        DAYS_CONTAINER.textContent = "- -";
+
+        return false;
+      }
+
       for (const key in FIELDS) {
         const FIELD = FIELDS[key];
 
-        if (key === "day-field") {
-          showError(FIELD, "Must be a valid date");
-          continue;
-        }
-
-        showError(FIELD, "");
+        FIELD.isValid = true;
+        hideError(FIELD.element);
       }
 
-      YEARS_CONTAINER.textContent = "--";
-      MONTHS_CONTAINER.textContent = "--";
-      DAYS_CONTAINER.textContent = "--";
+      const AGE = getAge(BIRTHDATE);
 
-      return false;
-    }
-
-    for (const key in FIELDS) {
-      const FIELD = FIELDS[key];
-
-      hideError(FIELD);
-    }
-
-    console.log("Form is valid");
-
-    const AGE = getAge(BIRTHDATE);
-
-    YEARS_CONTAINER.textContent = AGE.getFullYear().toString();
-    MONTHS_CONTAINER.textContent = AGE.getMonth().toString();
-    DAYS_CONTAINER.textContent = AGE.getDate().toString();
-  });
+      YEARS_CONTAINER.textContent = AGE.year.toString();
+      MONTHS_CONTAINER.textContent = AGE.month.toString();
+      DAYS_CONTAINER.textContent = AGE.day.toString();
+    });
+  } catch (error) {
+    throw error;
+  }
 }
 
 init();
