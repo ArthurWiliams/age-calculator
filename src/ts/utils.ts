@@ -22,7 +22,7 @@ export function showError(field: HTMLInputElement, message: string) {
     "text-light-red"
   );
 
-  if (ERROR_CONTAINER !== null && ERROR_CONTAINER !== undefined) {
+  if (ERROR_CONTAINER !== null) {
     ERROR_CONTAINER.textContent = message;
   }
 }
@@ -36,7 +36,7 @@ export function hideError(field: HTMLInputElement) {
     "text-smokey-grey"
   );
 
-  if (ERROR_CONTAINER !== null && ERROR_CONTAINER !== undefined) {
+  if (ERROR_CONTAINER !== null) {
     ERROR_CONTAINER.textContent = "";
   }
 }
