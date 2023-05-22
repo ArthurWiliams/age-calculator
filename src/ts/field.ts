@@ -30,7 +30,7 @@ export default class Field {
   //   });
   // }
 
-  value() {
-    return this.element?.value ?? "";
+  get value(): string {
+    return this.element.value;
   }
 }
