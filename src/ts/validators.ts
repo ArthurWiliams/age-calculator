@@ -72,6 +72,12 @@ export function isDayPast(value: string, fields: Fields): boolean {
   );
 }
 
-export function isValidDate(date: Date) {
-  return !isNaN(date.getTime());
+export function isValidDate(date: IDate): boolean {
+  let daysOfMonth = DAYS_OF_MONTHS[date.month];
+
+  if (isLeapYear(date.year) && date.month === 2) {
+    daysOfMonth += 1;
+  }
+
+  return daysOfMonth >= date.day;
 }
