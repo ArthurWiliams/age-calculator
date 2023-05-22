@@ -3,7 +3,7 @@ import { hideError, showError } from "./utils";
 import Field from "./field";
 
 export default class Form {
-  element: HTMLFormElement | null = null;
+  element: HTMLFormElement;
   fields: Fields = {};
 
   constructor(form: HTMLFormElement | string) {

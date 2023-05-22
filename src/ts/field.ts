@@ -1,7 +1,7 @@
 import { IRule, Fields } from "./types";
 
 export default class Field {
-  element: TElement<HTMLInputElement>;
+  element: HTMLInputElement;
   isValid: boolean = true;
   rules: IRule[] = [];
 
