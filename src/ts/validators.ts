@@ -43,12 +43,11 @@ export function isMonthPast(value: string, fields: Fields): boolean {
     return true;
   }
 
-  const DATE = createDate(YEAR_FIELD.value, value);
+  const { year: YEAR, month: MONTH } = createDate(YEAR_FIELD.value, value);
   const CURRENT_DATE = new Date();
 
   return !(
-    DATE.getFullYear() === CURRENT_DATE.getFullYear() &&
-    DATE.getMonth() > CURRENT_DATE.getMonth()
+    YEAR === CURRENT_DATE.getFullYear() && MONTH > CURRENT_DATE.getMonth()
   );
 }
 
@@ -60,13 +59,17 @@ export function isDayPast(value: string, fields: Fields): boolean {
     return true;
   }
 
-  const DATE = createDate(YEAR_FIELD.value, MONTH_FIELD.value, value);
+  const {
+    year: YEAR,
+    month: MONTH,
+    day: DAY,
+  } = createDate(YEAR_FIELD.value, MONTH_FIELD.value, value);
   const CURRENT_DATE = new Date();
 
   return !(
-    DATE.getFullYear() === CURRENT_DATE.getFullYear() &&
-    DATE.getMonth() === CURRENT_DATE.getMonth() &&
-    DATE.getDate() > CURRENT_DATE.getDate()
+    YEAR === CURRENT_DATE.getFullYear() &&
+    MONTH === CURRENT_DATE.getMonth() &&
+    DAY > CURRENT_DATE.getDate()
   );
 }
 
