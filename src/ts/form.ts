@@ -30,16 +30,15 @@ export default class Form {
   }
 
   addField(field: string | HTMLInputElement, rules: IRule[]) {
-    const FIELD = new Field(field);
+    try {
+      const FIELD = new Field(field);
 
-    if (FIELD.element === null) {
-      console.error(`Field with ${field} ID is not found`);
-      return;
+      FIELD.rules = rules;
+
+      this.fields[FIELD.element.id] = FIELD;
+    } catch (error) {
+      throw error;
     }
-
-    FIELD.rules = rules;
-
-    this.fields[FIELD.element.id] = FIELD;
   }
 
   validate() {
