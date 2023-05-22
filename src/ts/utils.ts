@@ -38,23 +38,16 @@ export function padZeros(value: string, length: number) {
     return value;
   }
 
-  return "0".repeat(ZEROS_COUNT).concat(value);
-}
+export function getElementById<T extends Element>(id: string): T {
+  if (id.startsWith("#")) {
+    id = id.slice(1);
+  }
 
-export function createDate(
-  year: string,
-  month: string = "01",
-  day: string = "01"
-) {
-  return new Date(
-    `${padZeros(year, 4)}-${padZeros(month, 2)}-${padZeros(day, 2)}`
-  );
-}
+  const ELEMENT = <T | null>document.getElementById(id);
 
-export function getAge(birthdate: Date) {
-  return sub(new Date(), {
-    years: birthdate.getFullYear(),
-    months: birthdate.getMonth(),
-    days: birthdate.getDate(),
-  });
+  if (ELEMENT === null) {
+    throw new Error(`Element with ${id} ID is not found!`);
+  }
+
+  return ELEMENT;
 }
