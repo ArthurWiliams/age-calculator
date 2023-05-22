@@ -43,6 +43,18 @@ export function hideError(field: HTMLInputElement) {
   }
 }
 
+export function createDate(
+  year: string,
+  month: string = "01",
+  day: string = "01"
+): IDate {
+  return {
+    year: parseInt(year),
+    month: parseInt(month),
+    day: parseInt(day),
+  };
+}
+
 export function getAge({ year, month, day }: IDate): IDate {
   const CURRENT_DATE = new Date();
 
