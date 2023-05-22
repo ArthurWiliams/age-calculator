@@ -41,13 +41,6 @@ export function hideError(field: HTMLInputElement) {
   }
 }
 
-export function padZeros(value: string, length: number) {
-  const ZEROS_COUNT = length - value.length;
-
-  if (ZEROS_COUNT <= 0) {
-    return value;
-  }
-
 export function getElementById<T extends Element>(id: string): T {
   if (id.startsWith("#")) {
     id = id.slice(1);
