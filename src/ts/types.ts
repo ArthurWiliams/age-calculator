@@ -11,3 +11,9 @@ export interface IRule {
   validator: TValidator;
   message: string;
 }
+
+export interface IDate {
+  year: number;
+  month: number;
+  day: number;
+}
