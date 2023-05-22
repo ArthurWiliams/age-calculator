@@ -46,7 +46,7 @@ export function isMonthPast(value: string, fields: Fields): boolean {
   const CURRENT_DATE = new Date();
 
   return !(
-    YEAR === CURRENT_DATE.getFullYear() && MONTH > CURRENT_DATE.getMonth()
+    YEAR === CURRENT_DATE.getFullYear() && MONTH > CURRENT_DATE.getMonth() + 1
   );
 }
 
@@ -67,7 +67,7 @@ export function isDayPast(value: string, fields: Fields): boolean {
 
   return !(
     YEAR === CURRENT_DATE.getFullYear() &&
-    MONTH === CURRENT_DATE.getMonth() &&
+    MONTH === CURRENT_DATE.getMonth() + 1 &&
     DAY > CURRENT_DATE.getDate()
   );
 }
