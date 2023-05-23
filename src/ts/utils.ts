@@ -65,9 +65,9 @@ export function getAge({ year, month, day }: IDate): IDate {
   ];
 
   if (currentDay < day) {
-    const DAYS_OF_THE_MONTH = DAYS_OF_MONTHS[currentMonth];
+    const DAYS_OF_THE_MONTH = DAYS_OF_MONTHS[month];
 
-    if (isLeapYear(currentYear) && currentMonth === 2) {
+    if (isLeapYear(year) && month === 2) {
       currentDay += DAYS_OF_THE_MONTH + 1;
     } else {
       currentDay += DAYS_OF_THE_MONTH;
