@@ -18,7 +18,7 @@ export const DAYS_OF_MONTHS = {
 export function showError(field: HTMLInputElement, message: string) {
   const ERROR_CONTAINER = field.nextElementSibling;
 
-  field.classList.replace("border-off-white", "border-light-red");
+  field.classList.replace("border-light-grey", "border-light-red");
   field.previousElementSibling?.classList.replace(
     "text-smokey-grey",
     "text-light-red"
@@ -32,7 +32,7 @@ export function showError(field: HTMLInputElement, message: string) {
 export function hideError(field: HTMLInputElement) {
   const ERROR_CONTAINER = field.nextElementSibling;
 
-  field.classList.replace("border-light-red", "border-off-white");
+  field.classList.replace("border-light-red", "border-light-grey");
   field.previousElementSibling?.classList.replace(
     "text-light-red",
     "text-smokey-grey"
