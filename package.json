@@ -5,6 +5,12 @@
   "private": "true",
   "type": "module",
   "browserslist": "defaults",
+  "prettier":{
+    "editorconfig": true,
+    "bracketSpacing": true,
+    "singleQuote": false,
+    "trailingComma": "es5"
+  },
   "source": "src/index.html",
   "scripts": {
     "start": "parcel",
