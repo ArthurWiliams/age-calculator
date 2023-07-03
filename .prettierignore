@@ -9,6 +9,9 @@
 # Avoid node_modules
 node_modules
 
+# Avoid lock files
+*lock*
+
 # Avoid parcel cache folder
 .parcel-cache
 
