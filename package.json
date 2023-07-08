@@ -6,6 +6,7 @@
   "type": "module",
   "browserslist": "defaults",
   "prettier":{
+    "editorconfig": true,
     "bracketSpacing": true,
     "singleQuote": false,
     "trailingComma": "es5"
