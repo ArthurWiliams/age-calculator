@@ -1,4 +1,4 @@
-import { Fields, IDate } from "./types";
+import { TFields, IDate } from "./types";
 import { createDate, isLeapYear, DAYS_OF_MONTHS } from "./utils";
 
 export function isEmpty(value: string): boolean {
@@ -35,7 +35,7 @@ export function isYearPast(value: string): boolean {
   return YEAR <= new Date().getFullYear();
 }
 
-export function isMonthPast(value: string, fields: Fields): boolean {
+export function isMonthPast(value: string, fields: TFields): boolean {
   const YEAR_FIELD = fields["year-field"];
 
   if (!YEAR_FIELD.isValid) {
@@ -50,7 +50,7 @@ export function isMonthPast(value: string, fields: Fields): boolean {
   );
 }
 
-export function isDayPast(value: string, fields: Fields): boolean {
+export function isDayPast(value: string, fields: TFields): boolean {
   const MONTH_FIELD = fields["month-field"];
   const YEAR_FIELD = fields["year-field"];
 
