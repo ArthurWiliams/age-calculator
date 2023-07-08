@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/ArthurWiliams/age-calculator#readme",
   "devDependencies": {
-    "parcel": "^2.9.3",
+    "parcel": "*",
     "postcss": "^8.4.25",
     "prettier": "^2.8.8",
     "tailwindcss": "^3.3.2"
