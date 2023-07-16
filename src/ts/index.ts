@@ -1,11 +1,5 @@
-import Form from "./form";
-import {
-  createDate,
-  getAge,
-  hideError,
-  showError,
-  getElementById,
-} from "./utils";
+import Field from "./field";
+import { createDate, getAge, hideError, showError } from "./utils";
 import {
   isEmpty,
   isValidDay,

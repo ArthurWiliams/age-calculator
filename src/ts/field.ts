@@ -1,5 +1,4 @@
 import { IRule } from "./types";
-import { getElementById } from "./utils";
 
 export default class Field {
   element: HTMLInputElement;

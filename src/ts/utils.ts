@@ -88,20 +88,6 @@ export function getAge({ year, month, day }: IDate): IDate {
   };
 }
 
-export function getElementById<T extends Element>(id: string): T {
-  if (id.startsWith("#")) {
-    id = id.slice(1);
-  }
-
-  const ELEMENT = <T | null>document.getElementById(id);
-
-  if (ELEMENT === null) {
-    throw new Error(`Element with ${id} ID is not found!`);
-  }
-
-  return ELEMENT;
-}
-
 export function isLeapYear(year: number): boolean {
   return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
 }
