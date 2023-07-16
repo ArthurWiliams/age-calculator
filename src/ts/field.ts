@@ -5,17 +5,9 @@ export default class Field {
   isValid: boolean = true;
   rules: IRule[] = [];
 
-  constructor(field: HTMLInputElement | string) {
-    if (field instanceof HTMLInputElement) {
-      this.element = field;
-      return;
-    }
-
-    try {
-      this.element = getElementById(field);
-    } catch (error) {
-      throw error;
-    }
+  constructor(field: HTMLInputElement, rules: IRule[]) {
+    this.element = field;
+    this.rules = rules;
   }
 
   get value(): string {
