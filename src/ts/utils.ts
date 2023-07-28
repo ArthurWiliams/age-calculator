@@ -43,6 +43,16 @@ export function hideError(field: HTMLInputElement) {
   }
 }
 
+export function getElementById<T extends Element>(id: string): T {
+  const ELEMENT = <T | null>document.getElementById(id);
+
+  if (ELEMENT === null) {
+    throw new Error(`Element of '${id}' ID is not found!`);
+  }
+
+  return ELEMENT;
+}
+
 export function createDate(
   year: string,
   month: string = "01",
