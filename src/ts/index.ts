@@ -1,5 +1,11 @@
 import Field from "./field";
-import { createDate, getAge, hideError, showError } from "./utils";
+import {
+  createDate,
+  getAge,
+  hideError,
+  showError,
+  getElementById,
+} from "./utils";
 import {
   isEmpty,
   isValidDay,
@@ -13,7 +19,7 @@ import {
 
 function init(): void {
   try {
-    const FORM = new Form("birthdate-form");
+    const FORM = <HTMLFormElement>getElementById("birthdate-form");
 
     const EMPTY_ERROR_MESSAGE = "This field is required";
     const PAST_ERROR_MESSAGE = "Must be in the past";
@@ -22,7 +28,11 @@ function init(): void {
     const MONTHS_CONTAINER = <HTMLSpanElement>getElementById("months");
     const DAYS_CONTAINER = <HTMLSpanElement>getElementById("days");
 
-    FORM.addField("year-field", [
+    const YEAR_FIELD = <HTMLInputElement>getElementById("year-field");
+    const MONTH_FIELD = <HTMLInputElement>getElementById("month-field");
+    const DAY_FIELD = <HTMLInputElement>getElementById("day-field");
+
+    const YEAR_RULES = new Field(YEAR_FIELD, [
       {
         message: EMPTY_ERROR_MESSAGE,
         validator: isEmpty,
@@ -37,7 +47,7 @@ function init(): void {
       },
     ]);
 
-    FORM.addField("month-field", [
+    const MONTH_RULES = new Field(MONTH_FIELD, [
       {
         message: EMPTY_ERROR_MESSAGE,
         validator: isEmpty,
@@ -52,7 +62,7 @@ function init(): void {
       },
     ]);
 
-    FORM.addField("day-field", [
+    const DAY_RULES = new Field(DAY_FIELD, [
       {
         message: EMPTY_ERROR_MESSAGE,
         validator: isEmpty,
@@ -67,24 +77,39 @@ function init(): void {
       },
     ]);
 
-    FORM.element.addEventListener("submit", function (event) {
+    const FIELDS = new Map([
+      [YEAR_FIELD.id, YEAR_RULES],
+      [MONTH_FIELD.id, MONTH_RULES],
+      [DAY_FIELD.id, DAY_RULES],
+    ]);
+
+    FORM.addEventListener("submit", function (event) {
       event.preventDefault();
 
-      FORM.validate();
+      for (const [, field] of FIELDS) {
+        for (const { message, validator } of field.rules) {
+          if (validator(field.value, FIELDS)) {
+            if (!field.isValid) {
+              hideError(field.element);
+              field.isValid = true;
+            }
+            continue;
+          }
 
-      if (!FORM.isValid()) {
-        YEARS_CONTAINER.textContent = "- -";
-        MONTHS_CONTAINER.textContent = "- -";
-        DAYS_CONTAINER.textContent = "- -";
-        return false;
+          showError(field.element, message);
+        }
       }
 
-      const FIELDS = FORM.fields;
+      for (const [, field] of FIELDS) {
+        if (!field.isValid) {
+          return false;
+        }
+      }
 
       const BIRTHDATE = createDate(
-        FIELDS["year-field"].value,
-        FIELDS["month-field"].value,
-        FIELDS["day-field"].value
+        YEAR_FIELD.value,
+        MONTH_FIELD.value,
+        DAY_FIELD.value
       );
 
       if (!isValidDate(BIRTHDATE)) {
@@ -121,7 +146,7 @@ function init(): void {
       DAYS_CONTAINER.textContent = AGE.day.toString();
     });
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
