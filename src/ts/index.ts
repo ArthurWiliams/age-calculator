@@ -88,11 +88,15 @@ function init(): void {
 
       for (const [, field] of FIELDS) {
         for (const { message, validator } of field.rules) {
-          if (validator(field.value, FIELDS)) {
-            if (!field.isValid) {
-              hideError(field.element);
-              field.isValid = true;
-            }
+          if (!validator(field.value, FIELDS)) {
+            showError(field.element, message);
+            field.isValid = false;
+            break;
+          }
+
+          hideError(field.element);
+          field.isValid = true;
+        }
             continue;
           }
 
