@@ -1,4 +1,4 @@
-import { TFields, IDate } from "./types";
+import { IFields, IDate } from "./types";
 import { createDate, isLeapYear, DAYS_OF_MONTHS } from "./utils";
 
 export function isEmpty(value: string): boolean {

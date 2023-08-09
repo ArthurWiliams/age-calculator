@@ -1,8 +1,10 @@
 import Field from "./field";
 
-export type TValidator = (value: string, fields: TFields) => boolean;
+export type TValidator = (value: string, fields: IFields) => boolean;
 
-export type TFields = Map<string, Field>;
+export interface IFields {
+  [index: string]: Field
+}
 
 export interface IRule {
   validator: TValidator;
