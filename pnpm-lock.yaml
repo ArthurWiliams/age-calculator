@@ -6,7 +6,7 @@ settings:
 
 devDependencies:
   parcel:
-    specifier: ^2.9.3
+    specifier: '*'
     version: 2.9.3(postcss@8.4.25)
   postcss:
     specifier: ^8.4.25
@@ -1850,6 +1850,7 @@ packages:
   /node-gyp-build-optional-packages@5.0.7:
     resolution: {integrity: sha512-YlCCc6Wffkx0kHkmam79GKvDQ6x+QZkMjFGrIMxgFNILFvGSbCp2fCBC55pGTT9gVaz8Na5CLmxt/urtzRv36w==}
     hasBin: true
+    requiresBuild: true
     dev: true
     optional: true
 
