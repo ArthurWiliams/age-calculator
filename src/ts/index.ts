@@ -77,16 +77,18 @@ function init(): void {
       },
     ]);
 
-    const FIELDS = new Map([
-      [YEAR_FIELD.id, YEAR_RULES],
-      [MONTH_FIELD.id, MONTH_RULES],
-      [DAY_FIELD.id, DAY_RULES],
-    ]);
+    const FIELDS = {
+      [YEAR_FIELD.id]: YEAR_RULES,
+      [MONTH_FIELD.id]: MONTH_RULES,
+      [DAY_FIELD.id]: DAY_RULES
+    }
 
     FORM.addEventListener("submit", function (event) {
       event.preventDefault();
 
-      for (const [, field] of FIELDS) {
+      for (const key in FIELDS) {
+        const field = FIELDS[key];
+
         for (const { message, validator } of field.rules) {
           if (!validator(field.value, FIELDS)) {
             showError(field.element, message);
@@ -97,14 +99,11 @@ function init(): void {
           hideError(field.element);
           field.isValid = true;
         }
-            continue;
-          }
-
-          showError(field.element, message);
-        }
       }
 
-      for (const [, field] of FIELDS) {
+      for (const key in FIELDS) {
+        const field = FIELDS[key];
+
         if (!field.isValid) {
           return false;
         }
