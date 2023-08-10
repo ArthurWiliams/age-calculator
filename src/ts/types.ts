@@ -3,7 +3,7 @@ import Field from "./field";
 export type TValidator = (value: string, fields: IFields) => boolean;
 
 export interface IFields {
-  [index: string]: Field
+  [index: string]: Field;
 }
 
 export interface IRule {
