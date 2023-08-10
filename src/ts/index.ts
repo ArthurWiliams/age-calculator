@@ -80,8 +80,8 @@ function init(): void {
     const FIELDS = {
       [YEAR_FIELD.id]: YEAR_RULES,
       [MONTH_FIELD.id]: MONTH_RULES,
-      [DAY_FIELD.id]: DAY_RULES
-    }
+      [DAY_FIELD.id]: DAY_RULES,
+    };
 
     FORM.addEventListener("submit", function (event) {
       event.preventDefault();
