@@ -36,7 +36,7 @@ export function isYearPast(value: string): boolean {
 }
 
 export function isMonthPast(value: string, fields: IFields): boolean {
-  const YEAR_FIELD = fields['year-field'];
+  const YEAR_FIELD = fields["year-field"];
 
   if (!YEAR_FIELD.isValid) {
     return true;
@@ -51,8 +51,8 @@ export function isMonthPast(value: string, fields: IFields): boolean {
 }
 
 export function isDayPast(value: string, fields: IFields): boolean {
-  const MONTH_FIELD = fields['month-field'];
-  const YEAR_FIELD = fields['day-field'];
+  const MONTH_FIELD = fields["month-field"];
+  const YEAR_FIELD = fields["year-field"];
 
   if (!MONTH_FIELD.isValid) {
     return true;
