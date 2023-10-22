@@ -1,6 +1,8 @@
 import { IDate } from "./types";
 
-export const DAYS_OF_MONTHS = {
+export const DAYS_OF_MONTHS: {
+  [index: number]: number | undefined;
+} = {
   1: 31,
   2: 28,
   3: 31,
@@ -15,42 +17,18 @@ export const DAYS_OF_MONTHS = {
   12: 31,
 };
 
-export function showError(field: HTMLInputElement, message: string) {
-  const ERROR_CONTAINER = field.nextElementSibling;
-
-  field.classList.replace("border-light-grey", "border-light-red");
-  field.previousElementSibling?.classList.replace(
-    "text-smokey-grey",
-    "text-light-red"
-  );
-
-  if (ERROR_CONTAINER !== null) {
-    ERROR_CONTAINER.textContent = message;
-  }
-}
-
-export function hideError(field: HTMLInputElement) {
-  const ERROR_CONTAINER = field.nextElementSibling;
-
-  field.classList.replace("border-light-red", "border-light-grey");
-  field.previousElementSibling?.classList.replace(
-    "text-light-red",
-    "text-smokey-grey"
-  );
-
-  if (ERROR_CONTAINER !== null) {
-    ERROR_CONTAINER.textContent = "";
-  }
-}
-
 export function getElementById<T extends Element>(id: string): T {
   const ELEMENT = <T | null>document.getElementById(id);
 
   if (ELEMENT === null) {
-    throw new Error(`Element of '${id}' ID is not found!`);
+    throw new Error(`Element with ID '${id}' is not found!`);
   }
 
   return ELEMENT;
+}
+
+export function getFieldError(id: string): HTMLSpanElement {
+  return <HTMLSpanElement>getElementById(id + "Error");
 }
 
 export function createDate(
@@ -75,7 +53,7 @@ export function getAge({ year, month, day }: IDate): IDate {
   ];
 
   if (currentDay < day) {
-    const DAYS_OF_THE_MONTH = DAYS_OF_MONTHS[month];
+    const DAYS_OF_THE_MONTH = <number>DAYS_OF_MONTHS[month];
 
     if (isLeapYear(year) && month === 2) {
       currentDay += DAYS_OF_THE_MONTH + 1;
@@ -99,5 +77,5 @@ export function getAge({ year, month, day }: IDate): IDate {
 }
 
 export function isLeapYear(year: number): boolean {
-  return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 }

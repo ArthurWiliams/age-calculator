@@ -26,60 +26,74 @@
       <header class="sr-only">
         <h1>Please Enter your birthdate</h1>
       </header>
-      <form id="birthdate-form" autocomplete="off">
+      <form id="form" autocomplete="off">
         <div class="grid grid-cols-3 gap-6 md:gap-7 md:w-[75%]">
           <p>
             <label
               class="mb-2 text-[0.9rem] inline-block uppercase text-smokey-grey font-bold tracking-[0.2rem]"
-              for="day-field"
+              for="dayField"
+              id="dayLabel"
               >day</label
             >
             <input
               class="focus:border-purple outline-none w-full px-5 py-3 mb-1.5 rounded-xl text-3xl/none border-[1px] border-light-grey font-bold text-off-black"
               type="text"
               name="day"
-              id="day-field"
+              id="dayField"
+              maxlength="2"
               placeholder="DD"
               inputmode="numeric"
-              aria-describedby="day-desc"
+              aria-describedby="dayFieldError"
             />
-            <span class="text-light-red italic text-sm" id="day-desc"></span>
+            <span
+              class="text-light-red italic text-sm"
+              id="dayFieldError"
+            ></span>
           </p>
 
           <p>
             <label
               class="mb-2 text-[0.9rem] inline-block uppercase text-smokey-grey font-bold tracking-[0.2rem]"
-              for="month-field"
+              for="monthField"
+              id="monthLabel"
               >month</label
             >
             <input
               class="focus:border-purple outline-none w-full px-5 py-3 mb-1.5 rounded-xl text-3xl/none border-[1px] border-light-grey font-bold text-off-black"
               type="text"
               name="month"
-              id="month-field"
+              id="monthField"
+              maxlength="2"
               placeholder="MM"
               inputmode="numeric"
-              aria-describedby="month-desc"
+              aria-describedby="monthFieldError"
             />
-            <span class="text-light-red italic text-sm" id="month-desc"></span>
+            <span
+              class="text-light-red italic text-sm"
+              id="monthFieldError"
+            ></span>
           </p>
 
           <p>
             <label
               class="mb-2 text-[0.9rem] inline-block uppercase text-smokey-grey font-bold tracking-[0.2rem]"
-              for="year-field"
+              for="yearField"
+              id="yearLabel"
               >year</label
             >
             <input
               class="focus:border-purple outline-none w-full px-5 py-3 mb-1.5 rounded-xl text-3xl/none border-[1px] border-light-grey font-bold text-off-black"
               type="text"
               name="year"
-              id="year-field"
+              id="yearField"
               placeholder="YYYY"
               inputmode="numeric"
-              aria-describedby="year-desc"
+              aria-describedby="yearFieldError"
             />
-            <span class="text-light-red italic text-sm" id="year-desc"></span>
+            <span
+              class="text-light-red italic text-sm"
+              id="yearFieldError"
+            ></span>
           </p>
         </div>
 

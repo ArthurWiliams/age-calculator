@@ -1,11 +1,19 @@
-import { IFields, IDate } from "./types";
-import { createDate, isLeapYear, DAYS_OF_MONTHS } from "./utils";
+import Field from "./field";
+import { isLeapYear, DAYS_OF_MONTHS } from "./utils";
 
 export function isEmpty(value: string): boolean {
-  return !(value === "");
+  return value !== "";
 }
 
-export function isValidDay(value: string): boolean {
+export function noLetters(value: string): boolean {
+  return !/[a-z]/i.test(value);
+}
+
+export function noSymbols(value: string): boolean {
+  return !/[^a-z0-9]/i.test(value);
+}
+
+export function isDay(value: string): boolean {
   if (!/^\d{1,2}$/.test(value)) {
     return false;
   }
@@ -15,7 +23,7 @@ export function isValidDay(value: string): boolean {
   return DAY > 0 && DAY <= 31;
 }
 
-export function isValidMonth(value: string): boolean {
+export function isMonth(value: string): boolean {
   if (!/^\d{1,2}$/.test(value)) {
     return false;
   }
@@ -25,59 +33,61 @@ export function isValidMonth(value: string): boolean {
   return MONTH > 0 && MONTH <= 12;
 }
 
-export function isValidYear(value: string): boolean {
-  return /^\d{1,4}$/.test(value);
+export function isYear(value: string): boolean {
+  return parseInt(value) >= 0;
 }
 
-export function isYearPast(value: string): boolean {
-  const YEAR = parseInt(value);
-
-  return YEAR <= new Date().getFullYear();
+export function isYearInFuture(value: string): boolean {
+  return parseInt(value) <= new Date().getFullYear();
 }
 
-export function isMonthPast(value: string, fields: IFields): boolean {
-  const YEAR_FIELD = fields["year-field"];
+export function isMonthInFuture(value: string, fields: Field[]): boolean {
+  const CURRENT_DATE = new Date();
 
-  if (!YEAR_FIELD.isValid) {
+  if (
+    fields[0].valueAsInt === CURRENT_DATE.getFullYear() &&
+    parseInt(value) > CURRENT_DATE.getMonth() + 1
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+export function isDayInFuture(value: string, fields: Field[]): boolean {
+  const CURRENT_DATE = new Date();
+
+  if (
+    fields[0].valueAsInt === CURRENT_DATE.getFullYear() &&
+    fields[1].valueAsInt === CURRENT_DATE.getMonth() + 1 &&
+    parseInt(value) > CURRENT_DATE.getDate()
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+export function isDate(value: string, fields: Field[]): boolean {
+  const [YEAR_FIELD, MONTH_FIELD] = fields;
+
+  if (!MONTH_FIELD.isValid || !YEAR_FIELD.isValid) {
     return true;
   }
 
-  const { year: YEAR, month: MONTH } = createDate(YEAR_FIELD.value, value);
-  const CURRENT_DATE = new Date();
+  const MONTH = MONTH_FIELD.valueAsInt;
 
-  return !(
-    YEAR === CURRENT_DATE.getFullYear() && MONTH > CURRENT_DATE.getMonth() + 1
-  );
-}
+  let addedDay = 0;
 
-export function isDayPast(value: string, fields: IFields): boolean {
-  const MONTH_FIELD = fields["month-field"];
-  const YEAR_FIELD = fields["year-field"];
+  if (isLeapYear(YEAR_FIELD.valueAsInt) && MONTH === 2) {
+    addedDay += 1;
+  }
 
-  if (!MONTH_FIELD.isValid) {
+  const DAYS = DAYS_OF_MONTHS[MONTH];
+
+  if (!DAYS) {
     return true;
   }
 
-  const {
-    year: YEAR,
-    month: MONTH,
-    day: DAY,
-  } = createDate(YEAR_FIELD.value, MONTH_FIELD.value, value);
-  const CURRENT_DATE = new Date();
-
-  return !(
-    YEAR === CURRENT_DATE.getFullYear() &&
-    MONTH === CURRENT_DATE.getMonth() + 1 &&
-    DAY > CURRENT_DATE.getDate()
-  );
-}
-
-export function isValidDate(date: IDate): boolean {
-  let daysOfMonth = DAYS_OF_MONTHS[date.month];
-
-  if (isLeapYear(date.year) && date.month === 2) {
-    daysOfMonth += 1;
-  }
-
-  return daysOfMonth >= date.day;
+  return DAYS + addedDay >= parseInt(value);
 }
