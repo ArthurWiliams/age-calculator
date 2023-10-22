@@ -45,7 +45,7 @@ export function isMonthInFuture(value: string, fields: Field[]): boolean {
   const CURRENT_DATE = new Date();
 
   if (
-    fields[0].valueAsInt === CURRENT_DATE.getFullYear() &&
+    fields[2].valueAsInt === CURRENT_DATE.getFullYear() &&
     parseInt(value) > CURRENT_DATE.getMonth() + 1
   ) {
     return false;
@@ -58,7 +58,7 @@ export function isDayInFuture(value: string, fields: Field[]): boolean {
   const CURRENT_DATE = new Date();
 
   if (
-    fields[0].valueAsInt === CURRENT_DATE.getFullYear() &&
+    fields[2].valueAsInt === CURRENT_DATE.getFullYear() &&
     fields[1].valueAsInt === CURRENT_DATE.getMonth() + 1 &&
     parseInt(value) > CURRENT_DATE.getDate()
   ) {
@@ -69,9 +69,17 @@ export function isDayInFuture(value: string, fields: Field[]): boolean {
 }
 
 export function isDate(value: string, fields: Field[]): boolean {
-  const [YEAR_FIELD, MONTH_FIELD] = fields;
+  const [, MONTH_FIELD, YEAR_FIELD] = fields;
 
-  if (!MONTH_FIELD.isValid || !YEAR_FIELD.isValid) {
+  const MONTH_FIELD_VALUE = MONTH_FIELD.value;
+  const YEAR_FIELD_VALUE = YEAR_FIELD.value;
+
+  if (
+    noLetters(MONTH_FIELD_VALUE) ||
+    noSymbols(MONTH_FIELD_VALUE) ||
+    noLetters(YEAR_FIELD_VALUE) ||
+    noSymbols(YEAR_FIELD_VALUE)
+  ) {
     return true;
   }
 
