@@ -1,6 +1,12 @@
 import Field from "./field";
 import { IValidator } from "./types";
-import { createDate, getAge, getElementById, getFieldError } from "./utils";
+import {
+  createDate,
+  fadeValueIn,
+  getAge,
+  getElementById,
+  getFieldError,
+} from "./utils";
 import {
   isEmpty,
   noLetters,
@@ -174,11 +180,12 @@ function init(): void {
     for (const field of FIELDS) {
       if (!field.isValid) {
         field.field.select();
+
         YEARS_CONTAINER.textContent = "- -";
         MONTHS_CONTAINER.textContent = "- -";
         DAYS_CONTAINER.textContent = "- -";
-        console.error("Form is invalid.");
-        return false;
+
+        return;
       }
     }
 
@@ -190,9 +197,9 @@ function init(): void {
 
     const AGE = getAge(BIRTHDATE);
 
-    YEARS_CONTAINER.textContent = AGE.year.toString();
-    MONTHS_CONTAINER.textContent = AGE.month.toString();
-    DAYS_CONTAINER.textContent = AGE.day.toString();
+    fadeValueIn(YEARS_CONTAINER, AGE.year.toString(), 200);
+    fadeValueIn(MONTHS_CONTAINER, AGE.month.toString(), 200, 60);
+    fadeValueIn(DAYS_CONTAINER, AGE.day.toString(), 200, 120);
   });
 }
 

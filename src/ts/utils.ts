@@ -79,3 +79,63 @@ export function getAge({ year, month, day }: IDate): IDate {
 export function isLeapYear(year: number): boolean {
   return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 }
+
+function fadeIn(element: HTMLElement, duration: number): number {
+  let start: number;
+
+  function animate(timestamp: number): void {
+    const value = (timestamp - start) / duration;
+
+    if (value < 1) {
+      element.style.opacity = value.toString();
+      requestAnimationFrame((timestamp) => animate(timestamp));
+    } else {
+      element.style.opacity = "1";
+    }
+  }
+
+  return requestAnimationFrame((timestamp) => {
+    start = timestamp;
+
+    animate(timestamp);
+  });
+}
+
+function fadeOut(element: HTMLElement, duration: number): number {
+  let start: number;
+
+  function animate(timestamp: number): void {
+    const value = 1 - (timestamp - start) / duration;
+
+    if (value > 0) {
+      element.style.opacity = value.toString();
+      requestAnimationFrame((timestamp) => animate(timestamp));
+    } else {
+      element.style.opacity = "0";
+    }
+  }
+
+  return requestAnimationFrame((timestamp) => {
+    start = timestamp;
+
+    animate(timestamp);
+  });
+}
+
+export function fadeValueIn(
+  element: HTMLElement,
+  value: string,
+  duration: number,
+  delay: number = 0
+): void {
+  duration = duration / 2;
+
+  setTimeout(() => {
+    fadeOut(element, duration);
+
+    setTimeout(() => {
+      element.textContent = value;
+      fadeIn(element, duration);
+    }, duration);
+  }, delay);
+}
