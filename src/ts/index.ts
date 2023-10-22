@@ -150,10 +150,22 @@ function init(): void {
     ]
   );
 
-  const FIELDS = [YEAR_FIELD, MONTH_FIELD, DAY_FIELD];
+  const FIELDS = [DAY_FIELD, MONTH_FIELD, YEAR_FIELD];
+
+  let previousValues: string[] = [];
 
   FORM.addEventListener("submit", function (event) {
     event.preventDefault();
+
+    if (FIELDS.every((field, index) => field.value === previousValues[index])) {
+      return;
+    }
+
+    previousValues = [];
+
+    for (const field of FIELDS) {
+      previousValues.push(field.value);
+    }
 
     for (const field of FIELDS) {
       field.validate(FIELDS);
